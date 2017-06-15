@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 DEBUG = False
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0']
 
 BROKER_URL = 'django://'
 
@@ -146,9 +146,23 @@ TWILIO_ACCOUNT_SID = TWILIO_SETTINGS.get("SID", "disabled")
 TWILIO_AUTH_TOKEN = TWILIO_SETTINGS.get("token", "disabled")
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
-
 import sys
+
+SECRET_KEY = os.environ.get('SECRET_KEY')
+DATABASES = {
+    'main': {
+        'NAME': '/opt/openduty/database/main/main_sqlite.db',
+        'ENGINE': 'django.db.backends.sqlite3'
+    },
+    'tests': {
+        'NAME': '/opt/openduty/database/test/tests_sqlite.db',
+        'ENGINE': 'django.db.backends.sqlite3'
+    },
+}
+
+default_database = os.environ.get('DJANGO_DATABASE')
+DATABASES['default'] = DATABASES[default_database]
+
 if 'test' in sys.argv:
     DATABASES = {
         'default': {
