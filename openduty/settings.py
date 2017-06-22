@@ -150,7 +150,7 @@ import sys
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DATABASES = {
-    'main': {
+    'default': {
         'NAME': '/opt/openduty/database/main/main_sqlite.db',
         'ENGINE': 'django.db.backends.sqlite3'
     }
