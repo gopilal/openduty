@@ -153,15 +153,8 @@ DATABASES = {
     'main': {
         'NAME': '/opt/openduty/database/main/main_sqlite.db',
         'ENGINE': 'django.db.backends.sqlite3'
-    },
-    'tests': {
-        'NAME': '/opt/openduty/database/test/tests_sqlite.db',
-        'ENGINE': 'django.db.backends.sqlite3'
-    },
+    }
 }
-
-default_database = os.environ.get('DJANGO_DATABASE')
-DATABASES['default'] = DATABASES[default_database]
 
 if 'test' in sys.argv:
     DATABASES = {
